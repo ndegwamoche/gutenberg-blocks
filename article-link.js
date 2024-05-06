@@ -1,48 +1,76 @@
-import "./video.scss"
-import { TextControl, TextareaControl, Button } from "@wordpress/components"
+/**
+ * ### 1. Article Link Block
+
+**File**: `article-link.js`
+
+**Description**: This block allows you to create a link to an article on the website.
+
+**Usage**:
+1. Add the Article Link block to your post or page.
+2. Input the URL of the article you want to link to.
+3. Optionally, customize the anchor text for the link.
+ */
+import "./video.scss";
+import { TextControl, TextareaControl, Button } from "@wordpress/components";
 
 wp.blocks.registerBlockType("rgblocktheme/article-link", {
-    title: "RG Article Link",
-    icon: "clipboard",
-    attributes: {
-        article_title: { type: "string" },
-        article_url: { type: "string" },
-        article_image_url: { type: "string" },
-        artcile_text: { type: "string" }
-    },
-    edit: EditComponent,
-    save: SaveComponent
-})
+  title: "RG Article Link",
+  icon: "clipboard",
+  attributes: {
+    article_title: { type: "string" },
+    article_url: { type: "string" },
+    article_image_url: { type: "string" },
+    artcile_text: { type: "string" }
+  },
+  edit: EditComponent,
+  save: SaveComponent
+});
 
 function EditComponent(props) {
+  function updateProductTitle(value) {
+    props.setAttributes({ article_title: value });
+  }
 
-    function updateProductTitle(value) {
-        props.setAttributes({ article_title: value })
-    }
+  function updateProductURL(value) {
+    props.setAttributes({ article_url: value });
+  }
 
-    function updateProductURL(value) {
-        props.setAttributes({ article_url: value })
-    }
+  function updateProductImageURL(value) {
+    props.setAttributes({ article_image_url: value });
+  }
 
-    function updateProductImageURL(value) {
-        props.setAttributes({ article_image_url: value })
-    }
+  function updateProductText(value) {
+    props.setAttributes({ artcile_text: value });
+  }
 
-    function updateProductText(value) {
-        props.setAttributes({ artcile_text: value })
-    }
-
-    return (
-        <div className="paying-attention-edit-block">
-            <h2>Article Link</h2>
-            <TextControl label="Article Title:" value={props.attributes.article_title} onChange={updateProductTitle} style={{ fontSize: "20px" }} />
-            <TextControl label="Article URL:" value={props.attributes.article_url} onChange={updateProductURL} />
-            <TextControl label="Article Image URL:" value={props.attributes.article_image_url} onChange={updateProductImageURL} />
-            <TextareaControl label="Article Text" value={props.attributes.artcile_text} onChange={updateProductText}></TextareaControl>
-        </div>
-    )
+  return (
+    <div className="paying-attention-edit-block">
+      <h2>Article Link</h2>
+      <TextControl
+        label="Article Title:"
+        value={props.attributes.article_title}
+        onChange={updateProductTitle}
+        style={{ fontSize: "20px" }}
+      />
+      <TextControl
+        label="Article URL:"
+        value={props.attributes.article_url}
+        onChange={updateProductURL}
+      />
+      <TextControl
+        label="Article Image URL:"
+        value={props.attributes.article_image_url}
+        onChange={updateProductImageURL}
+      />
+      <TextareaControl
+        label="Article Text"
+        value={props.attributes.artcile_text}
+        onChange={updateProductText}
+      ></TextareaControl>
+    </div>
+  );
 }
 
 function SaveComponent() {
-    return null
+  return null;
 }
